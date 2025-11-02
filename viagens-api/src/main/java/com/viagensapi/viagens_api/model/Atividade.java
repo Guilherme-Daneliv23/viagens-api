@@ -100,10 +100,9 @@ public class Atividade {
     }
 
     //CONSTRUTOR COMPLETO
-    public Atividade(long id, String titulo, String imagem, String descricao, String localUrl,
+    public Atividade(String titulo, String imagem, String descricao, String localUrl,
                  LocalDate data, LocalTime horaInicio, LocalTime horaFim,
                  BigDecimal custoEstimado, Categoria categoria, int prioridade) {
-        this.id = id;
         this.titulo = titulo;
         this.imagem = imagem;
         this.descricao = descricao;
