@@ -36,6 +36,7 @@ public class Atividade {
 
     //titulo da atividade
     @NotBlank(message = "O nome da atividade não pode ser vazio")
+    @Size(max = 100, message = "O título não pode ultrapassar 100 caracteres")
     @Column(length = 100, nullable = false)
     private String titulo;
 
@@ -45,6 +46,7 @@ public class Atividade {
     private String imagem;
 
     // descrição da atividade
+    @NotBlank(message = "A descrição não pode ser vazia")
     @Size(max = 500, message = "O tamenho da mensagem não pode ultrapassar 500 caracteres")
     @Column(length = 500, nullable = false)
     private String descricao;
@@ -56,7 +58,7 @@ public class Atividade {
 
     // data que a atividade vai ocorrer
     @NotNull(message = "A data da atividade não pode ser vazia")
-    @FutureOrPresent
+    @FutureOrPresent(message = "A data não pode estar no passado")
     @Column(nullable = false)
     private LocalDate data;
 
@@ -73,7 +75,7 @@ public class Atividade {
     // custo estimado daquela atividade
     @PositiveOrZero
     @Digits(integer=8, fraction=2, message = "O valor deve seguir o formato estabelecido com 2 casas decimais")
-    @Column(name = "custo_estimado", nullable = true)
+    @Column(name = "custo_estimado", nullable = true, precision = 10, scale = 2)
     private BigDecimal custoEstimado;
 
     // categoria da atividade baseando-se na enumeração que contém as categorias possíveis
@@ -92,7 +94,7 @@ public class Atividade {
     @NotNull(message = "O status da atividade não pode ser vazio")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
-    private Status status = Status.pendente;
+    private Status status = Status.PENDENTE;
 
     //CONSTRUTOR PADRÃO
     public Atividade()  {

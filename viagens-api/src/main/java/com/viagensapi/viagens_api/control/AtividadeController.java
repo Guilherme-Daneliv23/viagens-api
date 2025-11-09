@@ -8,7 +8,6 @@ import com.viagensapi.viagens_api.repository.AtividadeRepository;
 import jakarta.validation.Valid;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,36 +64,57 @@ public class AtividadeController {
 
     //GET / : listar todas as tarefas existentes
     @GetMapping("/")
-    public ResponseEntity<List<Atividade>> getAllAtividades(@RequestParam(required = false) String titulo,
-    @RequestParam(required = false) Categoria categoria, @RequestParam(required = false) Status status, 
-    @RequestParam(required = false) Integer prioridade, @RequestParam(required = false) LocalDate data) {
+    public ResponseEntity<List<Atividade>> getAllAtividades(
+            @RequestParam(required = false) String titulo,
+            @RequestParam(required = false) Categoria categoria,
+            @RequestParam(required = false) Status status,
+            @RequestParam(required = false) Integer prioridade,
+            @RequestParam(required = false) LocalDate data) {
         try {
-            List<Atividade> atividades = new ArrayList<>();
+            List<Atividade> atividades = rep.findAll();
 
-            if(titulo == null && categoria == null && status == null && prioridade == null && data == null) {
-                rep.findAll().forEach(atividades::add);
-            } else if(titulo != null && categoria == null && status == null && prioridade == null && data == null)  {
-                rep.findByTituloContaining(titulo).forEach(atividades::add);
-            } else if(titulo == null && categoria != null && status == null && prioridade == null && data == null)  {
-                rep.findByCategoria(categoria).forEach(atividades::add);
-            } else if(titulo == null && categoria == null && status != null && prioridade == null && data == null)  {
-                rep.findByStatus(status).forEach(atividades::add);
-            } else if(titulo == null && categoria == null && status == null && prioridade != null && data == null)  {
-                rep.findByPrioridade(prioridade).forEach(atividades::add);
-            } else if(titulo == null && categoria == null && status == null && prioridade == null && data != null)  {
-                rep.findByData(data).forEach(atividades::add);
+            if (titulo != null && !titulo.isBlank()) {
+                atividades = atividades.stream()
+                        .filter(a -> a.getTitulo().toLowerCase().contains(titulo.toLowerCase()))
+                        .toList();
             }
 
-            if(atividades.isEmpty())    {
+            if (categoria != null) {
+                atividades = atividades.stream()
+                        .filter(a -> a.getCategoria() == categoria)
+                        .toList();
+            }
+
+            if (status != null) {
+                atividades = atividades.stream()
+                        .filter(a -> a.getStatus() == status)
+                        .toList();
+            }
+
+            if (prioridade != null) {
+                atividades = atividades.stream()
+                        .filter(a -> a.getPrioridade() == prioridade)
+                        .toList();
+            }
+
+            if (data != null) {
+                atividades = atividades.stream()
+                        .filter(a -> a.getData().equals(data))
+                        .toList();
+            }
+
+            if (atividades.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
             return new ResponseEntity<>(atividades, HttpStatus.OK);
 
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     //PUT /:id : atualizar uma atividade dado um id
     @PutMapping("/{id}")
@@ -151,7 +171,7 @@ public class AtividadeController {
 
             if(data.isPresent())    {
                 Atividade olAtividade = data.get();
-                olAtividade.setStatus(Status.concluida);
+                olAtividade.setStatus(Status.CONCLUIDA);
                 Atividade updated = rep.save(olAtividade);
                 return new ResponseEntity<>(updated, HttpStatus.OK);
             } else {
@@ -170,7 +190,7 @@ public class AtividadeController {
 
             if(data.isPresent())    {
                 Atividade olAtividade = data.get();
-                olAtividade.setStatus(Status.cancelada);
+                olAtividade.setStatus(Status.CANCELADA);
                 Atividade updated = rep.save(olAtividade);
                 return new ResponseEntity<>(updated, HttpStatus.OK);
             } else {
