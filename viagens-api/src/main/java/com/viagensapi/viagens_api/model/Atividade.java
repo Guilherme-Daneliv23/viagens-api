@@ -47,7 +47,7 @@ public class Atividade {
 
     // descrição da atividade
     @NotBlank(message = "A descrição não pode ser vazia")
-    @Size(max = 500, message = "O tamenho da mensagem não pode ultrapassar 500 caracteres")
+    @Size(max = 500, message = "O tamanho da descrição não pode ultrapassar 500 caracteres")
     @Column(length = 500, nullable = false)
     private String descricao;
 
@@ -63,13 +63,11 @@ public class Atividade {
     private LocalDate data;
 
     // hora em que a atividade inicia
-    @NotNull(message = "A hora de início deve ser preenchida")
-    @Column(name = "hora_inicio", nullable = false)
+    @Column(name = "hora_inicio")
     private LocalTime horaInicio;
 
     // hora em que a atividade termina
-    @NotNull(message = "A hora de fim deve ser preenchida")
-    @Column(name = "hora_fim", nullable = false)
+    @Column(name = "hora_fim")
     private LocalTime horaFim;
 
     // custo estimado daquela atividade
