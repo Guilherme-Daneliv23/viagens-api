@@ -8,14 +8,19 @@
 * Alice Manuela da Silva de Azambuja
 * Mateus Augusto Oliveira de Assis
 
+![Logo](./viagens-ui/public/img/logo2.png)
+
 ## 🎯Objetivo
 O objetivo é desenvolver, do zero, uma aplicação completa que vai funcionar como um cronograma de atividades para se realizar em uma viagem, o Viajagenda. Nele será possível cadastrar diversas atividades a serem realizadas em uma viajem podendo deixar salvas informações importantes como valor do ingresso ou local que acontece. A aplicação possui duas telas de visualização pra essas atividades que foram cadastradas além da tela de cadastro das atividades:
 
 🟣 **Tela de CADASTRO:** Nessa tela existe o formulário de cadastro para as atividades, contendo todos os campos necessários para definir uma nova atividade.
+![Tela](./viagens-ui/public/img/atividades-form.png)
 
 🟣 **Tela AGENDA:** Nesse tela as atividades aparecem listadas como um mini calandário, separadas por dia, para que a pessoa possa ficar ciente de todas as atividades que precisa realizar naquela determindo dia.
+![Tela](./viagens-ui/public/img/atividades-agenda.png)
 
 🟣 **Tela ATIVIDADES:** Nessa tela terão diversos filtros como: Título, data em que acontece, categoria da atividade, prioridade e status de realização. Com isso, as atividades serão exibidas no formato de card permitindo a filtragem dela com filtros unitários ou combinados.
+![Tela](./viagens-ui/public/img/atividades-filtros.png)
 
 
 ## 🚀 Tecnologias Utilizadas
