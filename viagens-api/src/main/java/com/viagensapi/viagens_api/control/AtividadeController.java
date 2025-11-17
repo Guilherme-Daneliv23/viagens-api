@@ -136,6 +136,7 @@ public class AtividadeController {
                 oldAtividade.setCustoEstimado(at.getCustoEstimado());
                 oldAtividade.setCategoria(at.getCategoria());
                 oldAtividade.setPrioridade(at.getPrioridade());
+                oldAtividade.setStatus(at.getStatus());
 
                 Atividade updated = rep.save(oldAtividade);
 

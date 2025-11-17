@@ -1,7 +1,7 @@
 // src/App.jsx
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
-import AgendaAtividades from "./components/AgendaAtividades.jsx";
-import ListAtividades from "./components/ListAtividades.jsx";
+import AtividadeAgenda from "./components/AtividadeAgenda.jsx";
+import AtividadeFiltros from "./components/AtividadeFiltros.jsx";
 import AtividadeForm from "./components/AtividadeForm.jsx";
 
 const navItemStyle = (active) => ({
@@ -77,9 +77,9 @@ export default function App() {
 
       <div className="container mt-4">
         <Routes>
-          <Route path="/" element={<AgendaAtividades />} />
-          <Route path="/agenda" element={<AgendaAtividades />} />
-          <Route path="/atividades" element={<ListAtividades />} />
+          <Route path="/" element={<AtividadeAgenda />} />
+          <Route path="/agenda" element={<AtividadeAgenda />} />
+          <Route path="/atividades" element={<AtividadeFiltros />} />
           <Route path="/atividades/add" element={<AtividadeForm mode="create" />} />
           <Route path="/atividades/:id" element={<AtividadeForm mode="edit" />} />
         </Routes>

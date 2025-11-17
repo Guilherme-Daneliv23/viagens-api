@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AtividadeDataService from "../services/atividadeDataService";
-import AtividadeModal, { getStatusStyles } from "./AtividadeModal";
+import AtividadeModal, { getStatusStyles } from "./AtividadeCard";
 
 const categorias = [
   "ALIMENTACAO",
